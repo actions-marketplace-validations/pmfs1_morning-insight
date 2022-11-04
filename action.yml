@@ -1,0 +1,17 @@
+name: "morning-insight"
+description: "𝒢𝑒𝓉'𝓈 𝒶 𝓆𝓊𝑜𝓉𝑒, 𝑜𝓇 𝒿𝑜𝓀𝑒."
+author: pmfs1
+inputs:
+  GSM-7_COMPATIBLE:
+    description: "IF TRUE THE RESULT WILL BE GSM-7 (SMS) COMPATIBLE, MEANING, IT WILL BE LIMITED TO 160 CHARACTERS; OTHERWISE IT WON'T."
+    required: false
+    default: false
+outputs:
+  OUTPUT:
+    description: "OUTPUT"
+runs:
+  using: "node16"
+  main: "index.js"
+branding:
+  icon: "message-square"
+  color: "blue"

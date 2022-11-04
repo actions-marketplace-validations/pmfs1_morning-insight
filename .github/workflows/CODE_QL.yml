@@ -1,0 +1,27 @@
+name: 'CODE-QL'
+on: [ push, pull_request ]
+jobs:
+  CODE_QL:
+    name: 'CODE-QL'
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ javascript ]
+    steps:
+    - name: 'CHECKOUT'
+      uses: actions/checkout@v3
+    - name: 'SET-UP'
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+    - name: 'BUILD'
+      uses: github/codeql-action/autobuild@v2
+    - name: 'ANALYZE'
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"

@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "pmfs1"
+    labels:
+      - "OTHER"
+    commit-message:
+      prefix: "[DB]"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "pmfs1"
+    labels:
+      - "OTHER"
+    commit-message:
+      prefix: "[DB]"
