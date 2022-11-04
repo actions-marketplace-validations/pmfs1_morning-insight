@@ -2,17 +2,23 @@ name: 'DISCORD QUOTE SENDER'
 on:
   workflow_dispatch:
   schedule:
-   - cron: '0 23 * * *'
+   - cron: '0 7 * * *'
 jobs:
-  DISCORD_QUOTE_SENDER:
-    name: 'DISCORD QUOTE SENDER'
+  GET:
+    name: 'GET'
     runs-on: ubuntu-22.04
+    outputs:
+      OUTPUT: ${{ steps.GET.outputs.OUTPUT }}
     steps:
       - id: 'GET'
-        name: 'GET'
-        uses: pmfs1/morning-insight@1.0.0
+        uses: pmfs1/morning-insight@main
+  SEND:
+    name: 'SEND'
+    runs-on: ubuntu-22.04
+    needs: GET
+    steps:
       - name: 'SEND'
         uses: MineBartekSA/discord-webhook@v2.1
         with:
           webhook: ${{ secrets.WEBHOOK_URL }}
-          content: "> *${{ steps.GET.outputs.OUTPUT }}*"
+          content: "> *${{ needs.GET.outputs.OUTPUT }}*"
