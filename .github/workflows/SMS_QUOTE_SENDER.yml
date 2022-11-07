@@ -2,7 +2,7 @@ name: 'SMS QUOTE SENDER'
 on:
   workflow_dispatch:
   schedule:
-   - cron: '0 0 * * *'
+   - cron: '0 5 * * *'
 jobs:
   GET:
     name: 'GET'
@@ -11,7 +11,7 @@ jobs:
       OUTPUT: ${{ steps.GET.outputs.OUTPUT }}
     steps:
       - id: 'GET'
-        uses: pmfs1/morning-insight@1.0.0
+        uses: pmfs1/morning-insight@3.0.0
         with:
           # IF TRUE THE RESULT WILL BE GSM-7 (SMS) COMPATIBLE, MEANING, IT WILL BE LIMITED TO 160 CHARACTERS; OTHERWISE IT WON'T.
           GSM-7_COMPATIBLE: true
@@ -21,6 +21,7 @@ jobs:
     needs: GET
     steps:
       - name: 'SEND'
+        id: 'send'
         shell: pwsh
         run: | 
           $REQUEST_RESPONSE = $($(Invoke-WebRequest -Uri "${{ secrets.API_URI }}" -Body @{
@@ -33,3 +34,6 @@ jobs:
           } else {
             Write-Output "${{ needs.GET.outputs.OUTPUT }}"
           }
+      # - name: 'SEND (ALTERNATIVE)'
+      #   if: steps.send.outcome == 'failure'
+      #   continue-on-error: true

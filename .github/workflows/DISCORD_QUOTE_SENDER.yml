@@ -11,7 +11,7 @@ jobs:
       OUTPUT: ${{ steps.GET.outputs.OUTPUT }}
     steps:
       - id: 'GET'
-        uses: pmfs1/morning-insight@main
+        uses: pmfs1/morning-insight@3.0.0
   SEND:
     name: 'SEND'
     runs-on: ubuntu-22.04
