@@ -11,7 +11,7 @@ jobs:
       OUTPUT: ${{ steps.GET.outputs.OUTPUT }}
     steps:
       - id: 'GET'
-        uses: pmfs1/morning-insight@3.0.0
+        uses: pmfs1/morning-insight@3.0.1
         with:
           # IF TRUE THE RESULT WILL BE GSM-7 (SMS) COMPATIBLE, MEANING, IT WILL BE LIMITED TO 160 CHARACTERS; OTHERWISE IT WON'T.
           GSM-7_COMPATIBLE: true
